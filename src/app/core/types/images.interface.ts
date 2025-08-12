@@ -27,6 +27,8 @@ export interface Links {
   photos?: string;
   likes?: string;
   portfolio?: string;
+  following?: string;
+  followers?: string;
 }
 
 export interface ProfileImage {
@@ -78,7 +80,7 @@ export interface UnsplashPhoto {
   alternative_slugs: AlternativeSlugs;
   created_at: string;
   updated_at: string;
-  promoted_at: string;
+  promoted_at: string | null;
   width: number;
   height: number;
   color: string;
@@ -95,4 +97,10 @@ export interface UnsplashPhoto {
   topic_submissions: Record<string, TopicSubmission>;
   asset_type: string;
   user: User;
+}
+
+export interface SearchImagesResult {
+  results: UnsplashPhoto[];
+  total: number;
+  total_pages: number;
 }

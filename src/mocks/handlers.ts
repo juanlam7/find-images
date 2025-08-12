@@ -1,12 +1,12 @@
 import { delay, http, HttpResponse } from 'msw';
-import { mockImages } from './mock-data';
+import { mockImages } from './mock-images';
 
 export const handlers = [
   http.get('https://api.unsplash.com/photos', async ({ request }) => {
     const url = new URL(request.url);
     console.log('MSW: Intercepted GET /photos request');
 
-    await delay(5000);
+    await delay(1000);
 
     // return new HttpResponse(null, {
     //   status: 404,

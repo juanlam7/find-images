@@ -41,7 +41,7 @@ export class SearchField implements OnInit {
 
   initialValue = input<string>('');
   disabled = input<boolean>(false);
-  // this isLoading will be set as true when the API call start, and then set it to false
+  // TODO: this isLoading will be set as true when the API call start, and then set it to false
   isLoading = input<boolean>(false);
 
   searchChange = output<string>();
@@ -98,7 +98,6 @@ export class SearchField implements OnInit {
   clearSearch(): void {
     this.searchControl.setValue('');
     this.searchValue.set('');
-    this.searchClear.emit();
   }
 
   setValue(value: string): void {

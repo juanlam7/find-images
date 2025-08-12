@@ -12,9 +12,12 @@ import { SpinnerService } from '../../../core/services/spinner.service';
     appScrollNearEnd
     [scrollThreshold]="300"
     (nearEnd)="spinnerService.isLoading() ? '' : loadMore()"
-    class="home-wrapper hide-scrollbar"
+    class="home-wrapper"
   >
-    <app-search-field />
+    <app-search-field
+      (searchChange)="onSearch($event)"
+      (searchClear)="onSearchClear()"
+    />
     <app-grid [photos]="imagesServices.photos()" />
   </article>`,
   styleUrl: './home.css',
@@ -24,6 +27,21 @@ export class Home {
   spinnerService = inject(SpinnerService);
 
   loadMore() {
+    const currentQuery = this.imagesServices.searchQuery();
+    if (currentQuery) {
+      this.imagesServices.getSearchImages(currentQuery);
+      return;
+    }
     this.imagesServices.getImages();
+  }
+
+  onSearch(value: string) {
+    this.imagesServices.resetToDefaultValues();
+    this.imagesServices.getSearchImages(value);
+  }
+
+  onSearchClear() {
+    this.imagesServices.resetToDefaultValues();
+    this.loadMore();
   }
 }
