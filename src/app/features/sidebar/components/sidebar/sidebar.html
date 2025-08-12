@@ -1,0 +1,63 @@
+<button mat-icon-button class="menu-button" (click)="toggleMenu()">
+  <mat-icon aria-hidden="false" aria-label="icon theme">dark_mode</mat-icon>
+</button>
+<div
+  id="menu"
+  class="menu-content hide-scrollbar"
+  [class.open-sidebar]="isMenuOpen()"
+>
+  <!-- sidebar header -->
+  <div id="profile">
+    <p class="text-slate-500">Bienvenido 🚀</p>
+    <span>{{ i18n().greeting }}</span>
+    <span style="flex: 1 1 auto"></span>
+    <section>
+      <button matButton="filled" (click)="switchLanguage(locales.En)">
+        En
+      </button>
+      <button matButton="filled" (click)="switchLanguage(locales.Es)">
+        Es
+      </button>
+    </section>
+    <app-theme-picker />
+  </div>
+
+  <!-- sidebar content -->
+  <div id="nav" class="nav-container">
+    <!-- static options-->
+    @for (item of menuOptions; track item.route) {
+    <a
+      [routerLink]="item.route"
+      routerLinkActive="active-link"
+      class="nav-link"
+    >
+      <div class="nav-icon">
+        <i [class]="item.icon"></i>
+      </div>
+      <div class="nav-text">
+        <span class="nav-title">{{ item.label }}</span>
+        <span class="nav-subtitle">{{ item.subLabel }}</span>
+      </div>
+    </a>
+    }
+    <!-- dynamic options-->
+    @for (key of ['test 1', 'test 2']; track key) {
+    <a
+      [routerLink]="['/history', key]"
+      routerLinkActive="active-link"
+      class="nav-link"
+    >
+      <div>
+        <mat-icon aria-hidden="false" aria-label="icon theme"
+          >dark_mode</mat-icon
+        >
+      </div>
+      <div class="item-key">
+        <span>
+          {{ key }}
+        </span>
+      </div>
+    </a>
+    }
+  </div>
+</div>
