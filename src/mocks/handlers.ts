@@ -1,5 +1,6 @@
 import { delay, http, HttpResponse } from 'msw';
 import { mockImages } from './mock-images';
+import { mockSearchImagesResult } from './mock-search-images';
 
 export const handlers = [
   http.get('https://api.unsplash.com/photos', async ({ request }) => {
@@ -15,7 +16,7 @@ export const handlers = [
 
     return HttpResponse.json(mockImages, {
       headers: {
-        'X-Total': '5',
+        'X-Total': '15',
       },
     });
   }),
@@ -36,5 +37,18 @@ export const handlers = [
         statusText: 'Image not found',
       });
     }
+  }),
+
+  http.get('https://api.unsplash.com/search/photos', async ({ request }) => {
+    const url = new URL(request.url);
+    console.log('MSW: Intercepted GET /search/photos request');
+
+    await delay(1000);
+
+    return HttpResponse.json(mockSearchImagesResult, {
+      headers: {
+        'X-Total': '15',
+      },
+    });
   }),
 ];

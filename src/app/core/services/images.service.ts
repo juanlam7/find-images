@@ -1,11 +1,20 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { SearchImagesResult, UnsplashPhoto } from '../types/images.interface';
 import { calculateTotalPages } from '../utils/calculateTotalPages';
 
 const BASE_API = environment.apiUrl;
+
+const PHOTOS_KEY = 'photos';
+
+const loadFromLocalStorage = () => {
+  const photosFromLocalStorage = localStorage.getItem(PHOTOS_KEY) ?? '{}';
+  const photos = JSON.parse(photosFromLocalStorage);
+
+  return photos;
+};
 
 @Injectable({
   providedIn: 'root',
@@ -17,13 +26,29 @@ export class ImagesService {
 
   private photosPage = signal(1);
   private totalPhotosPage = signal(1);
+
+  isLoadingPhotos = signal(false);
   searchQuery = signal('');
+
+  searchHistory = signal<Record<string, UnsplashPhoto[]>>(
+    loadFromLocalStorage()
+  );
+  searchHistoryKeys = computed(() => Object.keys(this.searchHistory()));
 
   constructor() {
     this.getImages();
   }
 
+  savePhotosToLocalStorage = effect(() => {
+    const historyString = JSON.stringify(this.searchHistory());
+    localStorage.setItem(PHOTOS_KEY, historyString);
+  });
+
   getImages(): void {
+    if (this.isLoadingPhotos()) return;
+
+    this.isLoadingPhotos.set(true);
+
     if (this.totalPhotosPage() < this.photosPage()) return;
 
     this.http
@@ -44,6 +69,7 @@ export class ImagesService {
 
         this.totalPhotosPage.set(calculateTotalPages(totalPhotosHeader, 10));
         this.photosPage.update((page) => page + 1);
+        this.isLoadingPhotos.set(false);
       });
   }
 
@@ -74,6 +100,11 @@ export class ImagesService {
 
         this.totalPhotosPage.set(calculateTotalPages(totalPhotosHeader, 10));
         this.photosPage.update((page) => page + 1);
+
+        this.searchHistory.update((history) => ({
+          ...history,
+          [query.toLowerCase()]: resp.body?.results ?? [],
+        }));
       });
   }
 
@@ -82,5 +113,9 @@ export class ImagesService {
     this.photosPage.set(1);
     this.totalPhotosPage.set(1);
     this.searchQuery.set('');
+  }
+
+  getHistoryPhotos(query: string): UnsplashPhoto[] {
+    return this.searchHistory()[query] ?? [];
   }
 }

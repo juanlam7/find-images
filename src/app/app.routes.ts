@@ -5,6 +5,11 @@ export const routes: Routes = [
   {
     path: 'home',
     loadComponent: () =>
-      import('./features/home/pages/home').then((c) => c.Home),
+      import('./features/home/page/home').then((c) => c.Home),
+  },
+  {
+    path: 'detail/:id',
+    loadComponent: () =>
+      import('./features/detail/page/detail').then((c) => c.Detail),
   },
 ];

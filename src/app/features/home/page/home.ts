@@ -18,7 +18,7 @@ import { SpinnerService } from '../../../core/services/spinner.service';
       (searchChange)="onSearch($event)"
       (searchClear)="onSearchClear()"
     />
-    <app-grid [photos]="imagesServices.photos()" />
+    <app-grid [redirectRoute]="'/detail'" [photos]="imagesServices.photos()" />
   </article>`,
   styleUrl: './home.css',
 })
@@ -27,6 +27,7 @@ export class Home {
   spinnerService = inject(SpinnerService);
 
   loadMore() {
+    // TODO: console.log('CARGA DE NUEVO')
     const currentQuery = this.imagesServices.searchQuery();
     if (currentQuery) {
       this.imagesServices.getSearchImages(currentQuery);

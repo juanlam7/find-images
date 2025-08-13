@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -6,6 +11,7 @@ import { ThemePickerComponent } from '../../../../shared/components/theme';
 import { LanguageService } from '../../../../core/services/translation.services';
 import { I18N_TOKEN } from '../../../../core/tokens/i18n.token';
 import { Locales } from '../../../../core/types';
+import { ImagesService } from '../../../../core/services/images.service';
 
 interface MenuOption {
   icon: string;
@@ -28,6 +34,7 @@ interface MenuOption {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Sidebar {
+  imagesServices = inject(ImagesService);
   readonly i18n = inject(I18N_TOKEN);
   readonly languageService = inject(LanguageService);
   isMenuOpen = signal(false);

@@ -1,0 +1,41 @@
+@if (photoById(); as photoById) {
+<article class="detail-container">
+  <mat-card class="image-card">
+    <mat-card-header>
+      <mat-card-title>{{
+        photoById.alt_description ||
+          photoById.user.instagram_username ||
+          "Image"
+      }}</mat-card-title>
+      @if (photoById.user) {
+      <mat-card-subtitle>{{ photoById.user.name }}</mat-card-subtitle>
+      }
+    </mat-card-header>
+    <img
+      class="image-tag"
+      mat-card-image
+      [src]="photoById.urls.regular"
+      [alt]="photoById.alt_description"
+    />
+    <mat-card-content>
+      @if (photoById.description) {
+      <p>{{ photoById.description }}</p>
+      }
+      <p><strong>Likes:</strong> {{ photoById.likes }}</p>
+      @if (photoById.user.location) {
+      <p><strong>Location:</strong> {{ photoById.user.location }}</p>
+      } @if (photoById.user.bio) {
+      <p><strong>Photographer Bio:</strong> {{ photoById.user.bio }}</p>
+      }
+    </mat-card-content>
+    <mat-card-actions>
+      <a matButton [href]="photoById.links.html" target="_blank"
+        >View on Unsplash</a
+      >
+      <a matButton [href]="photoById.links.download" target="_blank"
+        >Download</a
+      >
+    </mat-card-actions>
+  </mat-card>
+</article>
+}

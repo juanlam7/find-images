@@ -33,7 +33,7 @@ export class SearchField implements OnInit {
 
   config = input<SearchConfig>({
     placeholder: 'Search...',
-    debounceTime: 300,
+    debounceTime: 500,
     minSearchLength: 2,
     appearance: 'fill',
     showClearButton: true,
@@ -77,7 +77,7 @@ export class SearchField implements OnInit {
   private setupSearchSubscription(): void {
     this.searchControl.valueChanges
       .pipe(
-        debounceTime(this.config().debounceTime || 300),
+        debounceTime(this.config().debounceTime || 500),
         distinctUntilChanged(),
         takeUntilDestroyed(this.destroyRef)
       )

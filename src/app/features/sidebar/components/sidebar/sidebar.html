@@ -41,7 +41,7 @@
     </a>
     }
     <!-- dynamic options-->
-    @for (key of ['test 1', 'test 2']; track key) {
+    @for (key of imagesServices.searchHistoryKeys(); track key) {
     <a
       [routerLink]="['/history', key]"
       routerLinkActive="active-link"
