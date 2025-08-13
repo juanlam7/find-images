@@ -24,6 +24,8 @@
       <p><strong>Likes:</strong> {{ photoById.likes }}</p>
       @if (photoById.user.location) {
       <p><strong>Location:</strong> {{ photoById.user.location }}</p>
+      } @if (photoById.created_at) {
+      <p><strong>Date:</strong> {{ photoById.created_at  | date:'fullDate' }}</p>
       } @if (photoById.user.bio) {
       <p><strong>Photographer Bio:</strong> {{ photoById.user.bio }}</p>
       }

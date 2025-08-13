@@ -15,6 +15,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { LastQuery } from '../../../../core/types/common';
+import { LAST_SEARCH_QUERY_KEY } from '../../../../core/utils/constants';
+import { loadFromLocalStorage } from '../../../../core/utils/loadFromLocalStorage';
 import { SearchConfig } from '../../types/searcher.interface';
 
 @Component({
@@ -72,6 +75,12 @@ export class SearchField implements OnInit {
 
   ngOnInit(): void {
     this.setupSearchSubscription();
+    const loadQuery = loadFromLocalStorage(LAST_SEARCH_QUERY_KEY) as LastQuery;
+
+    if ('lastQuery' in loadQuery) {
+      const { lastQuery } = loadQuery;
+      this.setValue(lastQuery);
+    }
   }
 
   private setupSearchSubscription(): void {

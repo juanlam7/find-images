@@ -5,10 +5,11 @@ import { map } from 'rxjs';
 import { ImagesService } from '../../../core/services/images.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-detail',
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, MatButtonModule, DatePipe],
   templateUrl: './detail.html',
   styleUrl: './detail.css',
 })

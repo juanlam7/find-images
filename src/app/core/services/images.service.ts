@@ -1,20 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { LastQuery } from '../types/common';
 import { SearchImagesResult, UnsplashPhoto } from '../types/images.interface';
 import { calculateTotalPages } from '../utils/calculateTotalPages';
-
-const BASE_API = environment.apiUrl;
-
-const PHOTOS_KEY = 'photos';
-
-const loadFromLocalStorage = () => {
-  const photosFromLocalStorage = localStorage.getItem(PHOTOS_KEY) ?? '{}';
-  const photos = JSON.parse(photosFromLocalStorage);
-
-  return photos;
-};
+import {
+  BASE_API,
+  LAST_SEARCH_QUERY_KEY,
+  PHOTOS_KEY,
+} from '../utils/constants';
+import { loadFromLocalStorage } from '../utils/loadFromLocalStorage';
+import { setToLocalStorage } from '../utils/setToLocalStorage';
 
 @Injectable({
   providedIn: 'root',
@@ -28,20 +24,31 @@ export class ImagesService {
   private totalPhotosPage = signal(1);
 
   isLoadingPhotos = signal(false);
-  searchQuery = signal('');
+  searchQuery = signal(
+    (loadFromLocalStorage(LAST_SEARCH_QUERY_KEY) as LastQuery).lastQuery
+  );
 
   searchHistory = signal<Record<string, UnsplashPhoto[]>>(
-    loadFromLocalStorage()
+    loadFromLocalStorage(PHOTOS_KEY) as Record<string, UnsplashPhoto[]>
   );
-  searchHistoryKeys = computed(() => Object.keys(this.searchHistory()));
+  searchHistoryKeys = computed(() => Object.keys(this.searchHistory()).reverse());
 
   constructor() {
-    this.getImages();
+    if (
+      !(
+        'lastQuery' in
+        (loadFromLocalStorage(LAST_SEARCH_QUERY_KEY) as LastQuery)
+      )
+    )
+      this.getImages();
   }
 
   savePhotosToLocalStorage = effect(() => {
-    const historyString = JSON.stringify(this.searchHistory());
-    localStorage.setItem(PHOTOS_KEY, historyString);
+    setToLocalStorage(this.searchHistory(), PHOTOS_KEY);
+  });
+
+  saveSearchQueryToLocalStorage = effect(() => {
+    setToLocalStorage({ lastQuery: this.searchQuery() }, LAST_SEARCH_QUERY_KEY);
   });
 
   getImages(): void {
