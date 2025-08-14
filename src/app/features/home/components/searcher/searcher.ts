@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { ImagesService } from '../../../../core/services/images.service';
 import { LastQuery } from '../../../../core/types/common';
 import { LAST_SEARCH_QUERY_KEY } from '../../../../core/utils/constants';
 import { loadFromLocalStorage } from '../../../../core/utils/loadFromLocalStorage';
@@ -33,6 +34,7 @@ import { SearchConfig } from '../../types/searcher.interface';
 })
 export class SearchField implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
+  imagesServices = inject(ImagesService);
 
   config = input<SearchConfig>({
     placeholder: 'Search...',
@@ -69,6 +71,12 @@ export class SearchField implements OnInit {
         this.searchControl.disable();
       } else {
         this.searchControl.enable();
+      }
+    });
+    effect(() => {
+      const stateQuery = this.imagesServices.historyKeyQuery();
+      if (stateQuery.length > 0) {
+        this.setValue(stateQuery);
       }
     });
   }

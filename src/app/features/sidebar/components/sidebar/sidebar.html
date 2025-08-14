@@ -42,11 +42,7 @@
     }
     <!-- dynamic options-->
     @for (key of imagesServices.searchHistoryKeys(); track key) {
-    <a
-      [routerLink]="['/history', key]"
-      routerLinkActive="active-link"
-      class="nav-link"
-    >
+    <a (click)="searchByKey(key)" class="nav-link">
       <div>
         <mat-icon aria-hidden="false" aria-label="icon theme"
           >dark_mode</mat-icon

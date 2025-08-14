@@ -28,10 +28,14 @@ export class ImagesService {
     (loadFromLocalStorage(LAST_SEARCH_QUERY_KEY) as LastQuery).lastQuery
   );
 
+  historyKeyQuery = signal<string>('');
+
   searchHistory = signal<Record<string, UnsplashPhoto[]>>(
     loadFromLocalStorage(PHOTOS_KEY) as Record<string, UnsplashPhoto[]>
   );
-  searchHistoryKeys = computed(() => Object.keys(this.searchHistory()).reverse());
+  searchHistoryKeys = computed(() =>
+    Object.keys(this.searchHistory()).reverse()
+  );
 
   constructor() {
     if (
@@ -120,6 +124,7 @@ export class ImagesService {
     this.photosPage.set(1);
     this.totalPhotosPage.set(1);
     this.searchQuery.set('');
+    this.historyKeyQuery.set('');
   }
 
   getHistoryPhotos(query: string): UnsplashPhoto[] {

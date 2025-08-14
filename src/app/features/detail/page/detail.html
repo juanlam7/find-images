@@ -1,43 +1,143 @@
-@if (photoById(); as photoById) {
-<article class="detail-container">
-  <mat-card class="image-card">
-    <mat-card-header>
-      <mat-card-title>{{
-        photoById.alt_description ||
-          photoById.user.instagram_username ||
-          "Image"
-      }}</mat-card-title>
-      @if (photoById.user) {
-      <mat-card-subtitle>{{ photoById.user.name }}</mat-card-subtitle>
-      }
-    </mat-card-header>
+@if (photoById(); as photo) {
+<div class="detail-container">
+  <!-- Image Section -->
+  <div class="image-section">
     <img
-      class="image-tag"
-      mat-card-image
-      [src]="photoById.urls.regular"
-      [alt]="photoById.alt_description"
+      [src]="photo.urls.regular"
+      [alt]="
+        photo.alt_description ||
+        photo.description ||
+        'Photo by ' + photo.user.name
+      "
+      class="detail-image"
+      loading="lazy"
     />
-    <mat-card-content>
-      @if (photoById.description) {
-      <p>{{ photoById.description }}</p>
-      }
-      <p><strong>Likes:</strong> {{ photoById.likes }}</p>
-      @if (photoById.user.location) {
-      <p><strong>Location:</strong> {{ photoById.user.location }}</p>
-      } @if (photoById.created_at) {
-      <p><strong>Date:</strong> {{ photoById.created_at  | date:'fullDate' }}</p>
-      } @if (photoById.user.bio) {
-      <p><strong>Photographer Bio:</strong> {{ photoById.user.bio }}</p>
-      }
-    </mat-card-content>
-    <mat-card-actions>
-      <a matButton [href]="photoById.links.html" target="_blank"
-        >View on Unsplash</a
-      >
-      <a matButton [href]="photoById.links.download" target="_blank"
-        >Download</a
-      >
-    </mat-card-actions>
-  </mat-card>
-</article>
+  </div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <mat-card class="info-card">
+      <mat-card-header>
+        <div class="user-info">
+          <img
+            [src]="photo.user.profile_image.medium"
+            [alt]="photo.user.name"
+            class="avatar"
+          />
+          <div class="user-details">
+            <h2 class="photographer-name">{{ photo.user.name }}</h2>
+            <p class="username">@{{ photo.user.username }}</p>
+          </div>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <!-- Photo Description -->
+        @if (photo.description || photo.alt_description) {
+        <div class="description-section">
+          <h3>Description</h3>
+          <p class="description">
+            {{ photo.description || photo.alt_description }}
+          </p>
+        </div>
+        }
+
+        <!-- Photo Stats -->
+        <div class="stats-section">
+          <h3>Photo Details</h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-label">Likes</span>
+              <span class="stat-value">{{ photo.likes | number }}</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Dimensions</span>
+              <span class="stat-value"
+                >{{ photo.width }} × {{ photo.height }}</span
+              >
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Created</span>
+              <span class="stat-value">{{
+                photo.created_at | date : "mediumDate"
+              }}</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Updated</span>
+              <span class="stat-value">{{
+                photo.updated_at | date : "mediumDate"
+              }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Bio -->
+        @if (photo.user.bio) {
+        <div class="bio-section">
+          <h3>About the Photographer</h3>
+          <p class="bio">{{ photo.user.bio }}</p>
+        </div>
+        }
+
+        <!-- User Stats -->
+        <div class="user-stats-section">
+          <h3>Photographer Stats</h3>
+          <div class="user-stats-grid">
+            <div class="user-stat-item">
+              <span class="user-stat-value">{{
+                photo.user.total_photos | number
+              }}</span>
+              <span class="user-stat-label">Photos</span>
+            </div>
+            <div class="user-stat-item">
+              <span class="user-stat-value">{{
+                photo.user.total_likes | number
+              }}</span>
+              <span class="user-stat-label">Likes</span>
+            </div>
+            <div class="user-stat-item">
+              <span class="user-stat-value">{{
+                photo.user.total_collections | number
+              }}</span>
+              <span class="user-stat-label">Collections</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Location -->
+        @if (photo.user.location) {
+        <div class="location-section">
+          <h3>Location</h3>
+          <p class="location">{{ photo.user.location }}</p>
+        </div>
+        }
+      </mat-card-content>
+
+      <mat-card-actions>
+        <div class="action-buttons">
+          @if (photo.links.download) {
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="downloadImage(photo.links.download!)"
+          >
+            Download
+          </button>
+          } @if (photo.links.html) {
+          <button mat-stroked-button (click)="openUnsplash(photo.links.html)">
+            View on Unsplash
+          </button>
+          } @if (photo.user.portfolio_url) {
+          <button
+            mat-stroked-button
+            (click)="openPortfolio(photo.user.portfolio_url!)"
+          >
+            Photographer Portfolio
+          </button>
+          }
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
 }
