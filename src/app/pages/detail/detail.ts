@@ -1,11 +1,11 @@
-import { Component, computed, inject, linkedSignal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
-import { ImagesService } from '../../core/services/images.service';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { DatePipe, DecimalPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { ActivatedRoute } from '@angular/router';
+import { ImagesService } from '@core/services/images.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-detail',

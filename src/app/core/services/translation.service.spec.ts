@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { Locales } from '../types';
 import { LanguageService } from './translation.services';
+import { Locales } from '@core/types';
 
 describe('LanguageService', () => {
   let service: LanguageService;

@@ -1,5 +1,5 @@
 import { HttpHandlerFn, HttpRequest } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+import { environment } from '@envs/environment';
 
 const API_KEY = environment.accessKey;
 

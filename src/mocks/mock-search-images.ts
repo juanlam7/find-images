@@ -1,4 +1,4 @@
-import { SearchImagesResult } from '../app/core/types/images.interface';
+import { SearchImagesResult } from '@core/types';
 // TODO: replace id by uuid
 
 export const mockSearchImagesResult: SearchImagesResult = {

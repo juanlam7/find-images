@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { ImagesService } from '../../core/services/images.service';
-import { SpinnerService } from '../../core/services/spinner.service';
-import { Grid } from '../../shared/components/grid/grid';
-import { SearchField } from '../../shared/components/searcher/searcher';
-import { ScrollNearEndDirective } from '../../shared/directives/scroll-near-end.directive';
+import { ImagesService } from '@core/services/images.service';
+import { SpinnerService } from '@core/services/spinner.service';
+import { Grid } from '@shared/components/grid/grid';
+import { SearchField } from '@shared/components/searcher/searcher';
+import { ScrollNearEndDirective } from '@shared/directives/scroll-near-end.directive';
 
 @Component({
   selector: 'app-home',

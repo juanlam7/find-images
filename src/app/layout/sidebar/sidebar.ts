@@ -7,13 +7,13 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { ImagesService } from '../../core/services/images.service';
-import { LanguageService } from '../../core/services/translation.services';
-import { I18N_TOKEN } from '../../core/tokens/i18n.token';
-import { Locales } from '../../core/types';
-import { LAST_SEARCH_QUERY_KEY } from '../../core/utils/constants';
-import { setToLocalStorage } from '../../core/utils/setToLocalStorage';
-import { ThemePickerComponent } from '../../shared/components/theme/theme';
+import { ImagesService } from '@core/services/images.service';
+import { LanguageService } from '@core/services/translation.services';
+import { I18N_TOKEN } from '@core/tokens/i18n.token';
+import { Locales } from '@core/types';
+import { LAST_SEARCH_QUERY_KEY } from '@core/utils/constants';
+import { setToLocalStorage } from '@core/utils/setToLocalStorage';
+import { ThemePickerComponent } from '@shared/components/theme/theme';
 
 interface MenuOption {
   icon: string;

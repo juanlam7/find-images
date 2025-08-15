@@ -1,5 +1,5 @@
-import { UnsplashPhoto } from '../app/core/types/images.interface';
 // TODO: replace id by uuid
+import { UnsplashPhoto } from '@core/types';
 
 export const mockImages: UnsplashPhoto[] = [
   {

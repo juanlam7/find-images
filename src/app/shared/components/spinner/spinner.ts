@@ -1,5 +1,5 @@
 import { Component, inject, input } from '@angular/core';
-import { SpinnerService } from '../../../core/services/spinner.service';
+import { SpinnerService } from '@core/services/spinner.service';
 
 @Component({
   selector: 'app-spinner',

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import Spinner from './shared/components/spinner/spinner';
-import { Sidebar } from './layout/sidebar/sidebar';
+import { Sidebar } from '@layout/sidebar/sidebar';
+import Spinner from '@shared/components/spinner/spinner';
 
 @Component({
   selector: 'app-root',

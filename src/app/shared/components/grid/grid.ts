@@ -1,6 +1,6 @@
-import { Component, input, signal } from '@angular/core';
-import { UnsplashPhoto } from '../../../core/types/images.interface';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { UnsplashPhoto } from '@core/types';
 import { FavoriteBtn } from '../favorite-btn/favorite-btn';
 
 @Component({

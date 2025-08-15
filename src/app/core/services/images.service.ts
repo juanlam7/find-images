@@ -1,16 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { Observable } from 'rxjs';
-import { LastQuery } from '../types/common';
-import { SearchImagesResult, UnsplashPhoto } from '../types/images.interface';
-import { calculateTotalPages } from '../utils/calculateTotalPages';
+import { LastQuery } from '@core/types';
+import {
+  SearchImagesResult,
+  UnsplashPhoto,
+} from '@core/types';
+import { calculateTotalPages } from '@core/utils/calculateTotalPages';
 import {
   BASE_API,
   LAST_SEARCH_QUERY_KEY,
   PHOTOS_KEY,
-} from '../utils/constants';
-import { loadFromLocalStorage } from '../utils/loadFromLocalStorage';
-import { setToLocalStorage } from '../utils/setToLocalStorage';
+} from '@core/utils/constants';
+import { loadFromLocalStorage } from '@core/utils/loadFromLocalStorage';
+import { setToLocalStorage } from '@core/utils/setToLocalStorage';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

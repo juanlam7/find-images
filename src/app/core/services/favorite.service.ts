@@ -1,9 +1,9 @@
 import { effect, Injectable, signal } from '@angular/core';
-import { FavoriteStorage } from '../types/common';
-import { UnsplashPhoto } from '../types/images.interface';
-import { FAV_PHOTOS_KEY } from '../utils/constants';
-import { loadFromLocalStorage } from '../utils/loadFromLocalStorage';
-import { setToLocalStorage } from '../utils/setToLocalStorage';
+import { FavoriteStorage } from '@core/types';
+import { UnsplashPhoto } from '@core/types';
+import { FAV_PHOTOS_KEY } from '@core/utils/constants';
+import { loadFromLocalStorage } from '@core/utils/loadFromLocalStorage';
+import { setToLocalStorage } from '@core/utils/setToLocalStorage';
 
 @Injectable({ providedIn: 'root' })
 export class FavoriteService {

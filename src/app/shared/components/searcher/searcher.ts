@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   DestroyRef,
+  OnInit,
   effect,
   inject,
   input,
-  OnInit,
   output,
   signal,
 } from '@angular/core';
@@ -14,12 +14,12 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { ImagesService } from '@core/services/images.service';
+import { LastQuery } from '@core/types';
+import { LAST_SEARCH_QUERY_KEY } from '@core/utils/constants';
+import { loadFromLocalStorage } from '@core/utils/loadFromLocalStorage';
+import { SearchConfig } from '@shared/types/searcher.interface';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { ImagesService } from '../../../core/services/images.service';
-import { LastQuery } from '../../../core/types/common';
-import { LAST_SEARCH_QUERY_KEY } from '../../../core/utils/constants';
-import { loadFromLocalStorage } from '../../../core/utils/loadFromLocalStorage';
-import { SearchConfig } from '../../types/searcher.interface';
 
 @Component({
   selector: 'app-search-field',

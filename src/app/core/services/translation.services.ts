@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { IAppLabels, Locales } from '../types';
+import { IAppLabels, Locales } from '@core/types';
 
 const ENGLISH: IAppLabels = {
   greeting: 'Hello',

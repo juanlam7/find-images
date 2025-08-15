@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { FavoriteService } from '../../../core/services/favorite.service';
-import { UnsplashPhoto } from '../../../core/types/images.interface';
+import { FavoriteService } from '@core/services/favorite.service';
+import { UnsplashPhoto } from '@core/types';
 
 @Component({
   selector: 'app-favorite-btn',
