@@ -13,7 +13,7 @@ import { I18N_TOKEN } from '../../../../core/tokens/i18n.token';
 import { Locales } from '../../../../core/types';
 import { LAST_SEARCH_QUERY_KEY } from '../../../../core/utils/constants';
 import { setToLocalStorage } from '../../../../core/utils/setToLocalStorage';
-import { ThemePickerComponent } from '../../../../shared/components/theme';
+import { ThemePickerComponent } from '../../../../shared/components/theme/theme';
 
 interface MenuOption {
   icon: string;

@@ -1,18 +1,21 @@
 import { Component, input, signal } from '@angular/core';
 import { UnsplashPhoto } from '../../core/types/images.interface';
 import { RouterLink } from '@angular/router';
+import { FavoriteBtn } from '../../shared/components/favorite-btn/favorite-btn';
 
 @Component({
   selector: 'app-grid',
-  imports: [RouterLink],
+  imports: [RouterLink, FavoriteBtn],
   template: `
     <div class="grid-container">
       @for (item of photos(); track item.id) {
-      <img
-        class="grid-item"
-        [src]="item.urls.small"
-        [routerLink]="redirectRoute() ? [redirectRoute(), item.id] : null"
-      />
+      <figure class="grid-item">
+        <app-favorite-btn [photo]="item" />
+        <img
+          [src]="item.urls.small"
+          [routerLink]="redirectRoute() ? [redirectRoute(), item.id] : null"
+        />
+      </figure>
       }
     </div>
   `,
