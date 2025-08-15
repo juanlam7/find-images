@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { ImagesService } from '../../../core/services/images.service';
-import { Grid } from '../../../layout/grid/grid';
-import { SearchField } from '../components/searcher/searcher';
-import { ScrollNearEndDirective } from '../directives/scroll-near-end.directive';
-import { SpinnerService } from '../../../core/services/spinner.service';
+import { ImagesService } from '../../core/services/images.service';
+import { SpinnerService } from '../../core/services/spinner.service';
+import { Grid } from '../../shared/components/grid/grid';
+import { SearchField } from '../../shared/components/searcher/searcher';
+import { ScrollNearEndDirective } from '../../shared/directives/scroll-near-end.directive';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +27,6 @@ export class Home {
   spinnerService = inject(SpinnerService);
 
   loadMore() {
-    // TODO: console.log('CARGA DE NUEVO')
     const currentQuery = this.imagesServices.searchQuery();
     if (currentQuery) {
       this.imagesServices.getSearchImages(currentQuery);

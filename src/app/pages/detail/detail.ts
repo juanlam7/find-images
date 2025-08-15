@@ -2,7 +2,7 @@ import { Component, computed, inject, linkedSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
-import { ImagesService } from '../../../core/services/images.service';
+import { ImagesService } from '../../core/services/images.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { DatePipe, DecimalPipe } from '@angular/common';

@@ -1,7 +1,7 @@
 import { Component, input, signal } from '@angular/core';
-import { UnsplashPhoto } from '../../core/types/images.interface';
+import { UnsplashPhoto } from '../../../core/types/images.interface';
 import { RouterLink } from '@angular/router';
-import { FavoriteBtn } from '../../shared/components/favorite-btn/favorite-btn';
+import { FavoriteBtn } from '../favorite-btn/favorite-btn';
 
 @Component({
   selector: 'app-grid',

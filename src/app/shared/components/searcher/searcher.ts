@@ -15,10 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { ImagesService } from '../../../../core/services/images.service';
-import { LastQuery } from '../../../../core/types/common';
-import { LAST_SEARCH_QUERY_KEY } from '../../../../core/utils/constants';
-import { loadFromLocalStorage } from '../../../../core/utils/loadFromLocalStorage';
+import { ImagesService } from '../../../core/services/images.service';
+import { LastQuery } from '../../../core/types/common';
+import { LAST_SEARCH_QUERY_KEY } from '../../../core/utils/constants';
+import { loadFromLocalStorage } from '../../../core/utils/loadFromLocalStorage';
 import { SearchConfig } from '../../types/searcher.interface';
 
 @Component({
